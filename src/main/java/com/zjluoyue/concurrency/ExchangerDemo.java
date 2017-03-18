@@ -11,7 +11,7 @@ import java.util.concurrent.*;
  * Created by Jia on 2017/2/8.
  * Exchanger 可以在对中对元素进行配对和交换的线程的同步点
  */
-// full
+// full 生产者
 class ExchangerProducer<T> implements Runnable {
     private Generator<T> generator;
     private Exchanger<List<T>> exchanger;
@@ -37,7 +37,7 @@ class ExchangerProducer<T> implements Runnable {
         }
     }
 }
-// empty
+// empty 消费者
 class ExchangerConsumer<T> implements Runnable {
     private Exchanger<List<T>> exchanger;
     private List<T> holder;

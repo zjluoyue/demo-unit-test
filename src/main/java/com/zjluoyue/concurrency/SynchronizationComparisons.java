@@ -96,8 +96,8 @@ class BaseLine extends Accumulator {
     }
 
     public void accumulate() {
-        value += preLoaded[index++];
-        if (index >= SIZE)
+        value += preLoaded[index = (index >=SIZE)? 0: index];
+        if (++index >= SIZE)
             index = 0;
     }
 
@@ -157,14 +157,13 @@ class AtomicTest extends Accumulator {
     {
         id = "Atomic";
     }
-
     private AtomicInteger index = new AtomicInteger(0);
     private AtomicLong value = new AtomicLong(0);
 
     @Override
     public void accumulate() {
         int i = index.getAndIncrement();
-        value.getAndAdd(preLoaded[i]);
+        value.getAndAdd(preLoaded[i = (i >=SIZE)? 0: i]);
         if (++i >= SIZE)
             index.set(0);
     }
@@ -183,16 +182,16 @@ public class SynchronizationComparisons {
     static void test() {
         System.out.println("================================");
         System.out.printf("%-12s : %13d\n", "Cycles", Accumulator.cycles);
-//        baseLine.timedTest();
+        baseLine.timedTest();
         synch.timedTest();
         lock.timedTest();
-//        atomic.timedTest();
-//        Accumulator.report(synch, baseLine);
-//        Accumulator.report(lock, baseLine);
-//        Accumulator.report(atomic, baseLine);
+        atomic.timedTest();
+        Accumulator.report(synch, baseLine);
+        Accumulator.report(lock, baseLine);
+        Accumulator.report(atomic, baseLine);
         Accumulator.report(synch, lock);
-//        Accumulator.report(synch, atomic);
-//        Accumulator.report(lock, atomic);
+        Accumulator.report(synch, atomic);
+        Accumulator.report(lock, atomic);
     }
 
     public static void main(String[] args) {
