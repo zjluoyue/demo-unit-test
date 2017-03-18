@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Jia on 2017/1/15.
  */
-public class DaemonFromFactoty implements Runnable {
+public class DaemonFromFactory implements Runnable {
 
     public void run() {
         try {
@@ -24,7 +24,7 @@ public class DaemonFromFactoty implements Runnable {
         ExecutorService exec = Executors.newCachedThreadPool(
                 new DaemonThreadFactory());
         for (int i = 0; i < 10; i++) {
-            exec.execute(new DaemonFromFactoty());
+            exec.execute(new DaemonFromFactory());
         }
         System.out.println("All Daemons started");
         TimeUnit.MILLISECONDS.sleep(200);
