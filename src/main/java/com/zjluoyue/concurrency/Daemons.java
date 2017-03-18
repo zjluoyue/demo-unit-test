@@ -1,6 +1,5 @@
 package com.zjluoyue.concurrency;
 
-import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 /**

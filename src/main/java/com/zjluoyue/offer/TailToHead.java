@@ -2,15 +2,6 @@ package com.zjluoyue.offer;
 import java.util.ArrayList;
 import java.util.Stack;
 
-class ListNode {
-    int val;
-    ListNode next = null;
-
-    ListNode(int val) {
-        this.val = val;
-    }
-}
-
 public class TailToHead {
 
     ArrayList<Integer> arrays = new ArrayList<>();
