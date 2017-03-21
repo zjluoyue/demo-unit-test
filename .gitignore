@@ -7,3 +7,7 @@
 *.iml
 target/
 demo-unit-test.iml
+/test.out
+/data.txt
+/data2.txt
+/test.txt
