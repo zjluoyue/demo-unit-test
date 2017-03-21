@@ -1,8 +1,6 @@
 package com.zjluoyue.offer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Created by Jia on 2017/3/10.
@@ -20,13 +18,17 @@ public class Permutation {
         return strList;
     }
 
+    static Set<String> stringSet = new HashSet<>();
+
     private void Permutation(char[] chars, int i, int length) {
         if (i == length-1) {
             strList.add(String.valueOf(chars));
+            // 需用set去重复
+            stringSet.add(String.valueOf(chars));
             return;
         }
         for (int j = i; j < length; j++) {
-            if (chars[i] != chars[j] || i == j) {
+            if (i == j || chars[i] != chars[j]) {
                 char temp = chars[i];
                 chars[i] = chars[j];
                 chars[j] = temp;
@@ -68,8 +70,9 @@ public class Permutation {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> strings = new Permutation().Permutation("abc");
+        ArrayList<String> strings = new Permutation().Permutation("acbb");
         System.out.println(strings.toString());
+        System.out.println(stringSet.toString());
         char[] a = {'a', 'b', 'c'};
         ArrayList<String> re = new Permutation().Combination(a);
     }

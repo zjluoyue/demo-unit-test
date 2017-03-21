@@ -1,9 +1,6 @@
 package com.zjluoyue.offer;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by Jia on 2017/3/12.
@@ -166,17 +163,44 @@ public class ArrayUtil {
         return sum;
     }
 
+    static Set<String> allNumber = new HashSet<>();
     public String PrintMinNumber(int [] numbers) {
+        int len;
+        if (numbers == null || (len=numbers.length) <= 0)
+            return "";
+        Permutation(numbers, 0, len);
 
-        return "";
+        ArrayList<String> num = new ArrayList<>(allNumber);
+        Collections.sort(num);
+        return num.get(0);
+    }
+
+    public static void Permutation(int[] numbers, int i, int length) {
+        if (i == length-1) {
+            String strNum = "";
+            for (int number : numbers) {
+                strNum += number;
+            }
+            allNumber.add(strNum);
+            return;
+        }
+        for (int j = i; j < length; j++) {
+            if (i == j || numbers[i] != numbers[j]) {
+                swap(numbers, i, j);
+                Permutation(numbers, i + 1, length);
+                swap(numbers, i, j);
+            }
+        }
     }
     public static void main(String[] args) {
         int[] array = {1, 2, 3, 2, 2, 2, 5, 4, 2};
         int[] a = {2, 2, 2, 3, 5, 3, 4, 1};
-        System.out.println(MoreThanHalfNum_Solution(array));
-        System.out.println(moreThanHalfNum(a));
-        System.out.println(GetLeastNumbers(array, 4).toString());
-        System.out.println(GetLeastNumbers(array, 0).toString());
-        System.out.println(GetLeastNumbers1(array, 0).toString());
+//        System.out.println(MoreThanHalfNum_Solution(array));
+//        System.out.println(moreThanHalfNum(a));
+//        System.out.println(GetLeastNumbers(array, 4).toString());
+//        System.out.println(GetLeastNumbers(array, 0).toString());
+//        System.out.println(GetLeastNumbers1(array, 0).toString());
+        String minNum = new ArrayUtil().PrintMinNumber(new int[] {123 ,5, 5, 45});
+        System.out.println(minNum);
     }
 }
